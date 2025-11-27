@@ -138,11 +138,6 @@ def determinan_3x3_kofaktor(matriks, padded_plaintext):
 # =======================================================================
 
 if __name__ == "__main__":
-    
-  # --- Input Contoh ---
-  # Raw: BETA -> Padded: BETAX X (Last three: T, A, X)
-  # Check: T=19(Ganjil), A=0(Genap), X=23(Ganjil). Total Genap = 1. -> Operasi: +
-  # Det Key: GYBNQKURP -> 25. Hasil: (25+25)%26 = 24. String: R E N (E = char ke-2)
   input_text = input("Masukkan Plaintext: ")
   input_key = input("Masukkan Key (min 9 karakter): ")
     
