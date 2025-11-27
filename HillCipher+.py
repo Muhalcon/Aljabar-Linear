@@ -136,9 +136,6 @@ def determinan_3x3_kofaktor(matriks, padded_plaintext):
   elif total_genap >= 3:
     hasil_modifikasi *= det_mod_26 
     string_tambahan = f"{second_char}UT"
-        
-  # Modulo 26 akhir
-  hasil_modifikasi = (hasil_modifikasi % 26 + 26) % 26
   
   # Menambahkan string ekstra  
   return string_tambahan
