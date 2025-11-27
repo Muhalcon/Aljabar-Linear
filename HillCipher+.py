@@ -72,15 +72,10 @@ def hill_encrypt(plaintext, key):
     
   # Menambahkan string ekstra
   extra_string = determinan_3x3_kofaktor(key_matrix, plaintext)
-  ciphertext = append_extra_string(ciphertext, extra_string)
+  ciphertext = ciphertext + extra_string
 
   # Mengembalikan Ciphertext dan Matriks Kunci
   return ciphertext, key_matrix
-
-# Menambahkan string ekstra ke ciphertext
-def append_extra_string(ciphertext, extra_string):
-  return ciphertext + extra_string
-
 
 # =======================================================================
 # BAGIAN 3: FUNGSI DETERMINAN KHUSUS (Dinamis berdasarkan 3 Huruf Akhir)
