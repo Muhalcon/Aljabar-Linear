@@ -60,7 +60,7 @@ def hill_encrypt(plaintext, key):
   try:
     key_matrix = generate_key_matrix(key)
   except ValueError as e:
-    return str(e), None, None
+    return str(e), None
 
   # Enkripsi
   ciphertext = ""
@@ -124,16 +124,16 @@ def determinan_3x3_kofaktor(matriks, padded_plaintext):
   string_tambahan = ""
   
   # Modifikasi String
+  # Total Genap <= 1 -> Penambahan (+)
   if total_genap <= 1:
-    # Total Genap = 1 -> Penambahan (+)
     hasil_modifikasi += det_mod_26
     string_tambahan = f"R{second_char}N"
+  # Total Genap = 2 -> Pengurangan (-)
   elif total_genap == 2:
-    # Total Genap = 2 -> Pengurangan (-)
     hasil_modifikasi -= det_mod_26 
     string_tambahan = f"QO{second_char}"
+  # Total Genap >= 3 -> Perkalian (*)
   elif total_genap >= 3:
-    # Total Genap = 3 -> Perkalian (*)
     hasil_modifikasi *= det_mod_26 
     string_tambahan = f"{second_char}UT"
         
