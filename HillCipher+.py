@@ -16,10 +16,12 @@ def num_to_char(num):
 
 # Membuat matriks 3x3 dari 9 karakter pertama string input key.
 def generate_key_matrix(key_string):
+  # Menghapus spasi dan mengubah menjadi huruf besar
   key_string = key_string.replace(" ", "").upper()
   if len(key_string) < 9:
     raise ValueError("Key harus memiliki minimal 9 karakter.")
   
+  # Membuat matriks 3x3
   matrix = []
   iterator = 0
   for i in range(3):
@@ -28,20 +30,26 @@ def generate_key_matrix(key_string):
       row.append(char_to_num(key_string[iterator]))
       iterator += 1
     matrix.append(row)
+    
+  # Mengembalikan matriks 3x3
   return matrix
 
 # Melakukan perkalian matriks (3x3) dengan vektor teks (3x1) mod 26.
 def vector_multiply(key_matrix, text_vector):
+  # Melakukan perkalian matriks
   result_vector = []
   for i in range(3): 
     val = 0
     for j in range(3):
       val += key_matrix[i][j] * text_vector[j]
     result_vector.append(val % 26)
+    
+  # Mengembalikan vektor hasil
   return result_vector
 
 # Fungsi utama enkripsi Hill Cipher.
 def hill_encrypt(plaintext, key):
+  # Menghapus spasi dan mengubah menjadi huruf besar
   plaintext = plaintext.replace(" ", "").upper()
     
   # Padding
@@ -66,7 +74,7 @@ def hill_encrypt(plaintext, key):
   extra_string = determinan_3x3_kofaktor(key_matrix, plaintext)
   ciphertext = append_extra_string(ciphertext, extra_string)
 
-  # Mengembalikan Ciphertext, Matriks Kunci, DAN Plaintext yang Sudah di-Padding
+  # Mengembalikan Ciphertext dan Matriks Kunci
   return ciphertext, key_matrix
 
 # Menambahkan string ekstra ke ciphertext
@@ -81,7 +89,7 @@ def append_extra_string(ciphertext, extra_string):
 # Menghitung determinan matriks 3x3 (mod 26) dan memodifikasinya
 # berdasarkan jumlah bilangan genap dari 3 huruf terakhir (setelah padding).
 def determinan_3x3_kofaktor(matriks, padded_plaintext):
-    
+  # Validasi ukuran
   if len(matriks) != 3 or any(len(baris) != 3 for baris in matriks):
     raise ValueError("Input harus berupa matriks ukuran 3x3.")
         
@@ -95,10 +103,11 @@ def determinan_3x3_kofaktor(matriks, padded_plaintext):
   # Modulo 26 awal
   det_mod_26 = (det % 26 + 26) % 26
       
-  # Analisis 3 Huruf Terakhir
+  # Validasi 3 Huruf Terakhir
   if len(padded_plaintext) < 3:
     raise ValueError("Plaintext terlalu pendek untuk dianalisis 3 huruf terakhir.")
         
+  # Ambil 3 huruf terakhir
   last_three_chars = padded_plaintext[-3:]
   
   # Ubah 3 huruf akhir menjadi nilai numerik
@@ -130,7 +139,8 @@ def determinan_3x3_kofaktor(matriks, padded_plaintext):
         
   # Modulo 26 akhir
   hasil_modifikasi = (hasil_modifikasi % 26 + 26) % 26
-    
+  
+  # Menambahkan string ekstra  
   return string_tambahan
 
 # =======================================================================
@@ -138,11 +148,13 @@ def determinan_3x3_kofaktor(matriks, padded_plaintext):
 # =======================================================================
 
 if __name__ == "__main__":
+  # Input
   input_text = input("Masukkan Plaintext: ")
   input_key = input("Masukkan Key (min 9 karakter): ")
     
-  # 1. ENKRIPSI HILL CIPHER
+  # Eksekusi
   ciphertext, key_matrix_list = hill_encrypt(input_text, input_key)
-    
+  
+  # Output  
   if key_matrix_list is not None:
     print(f"Ciphertext: {ciphertext}")
