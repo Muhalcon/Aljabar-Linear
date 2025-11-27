@@ -74,8 +74,11 @@ def hill_encrypt(plaintext, key):
   extra_string = determinan_3x3_kofaktor(key_matrix, plaintext)
   ciphertext = ciphertext + extra_string
 
-  # Mengembalikan Ciphertext dan Matriks Kunci
-  return ciphertext, key_matrix
+  # Mengembalikan Ciphertext
+  if key_matrix is not None:
+    return ciphertext
+  elif key_matrix is None:
+    return "Error"
 
 # =======================================================================
 # BAGIAN 3: FUNGSI DETERMINAN KHUSUS (Dinamis berdasarkan 3 Huruf Akhir)
@@ -145,8 +148,7 @@ if __name__ == "__main__":
   input_key = input("Masukkan Key (min 9 karakter): ")
     
   # Eksekusi
-  ciphertext, key_matrix_list = hill_encrypt(input_text, input_key)
+  ciphertext = hill_encrypt(input_text, input_key)
   
   # Output  
-  if key_matrix_list is not None:
-    print(f"Ciphertext: {ciphertext}")
+  print(f"Ciphertext: {ciphertext}")
